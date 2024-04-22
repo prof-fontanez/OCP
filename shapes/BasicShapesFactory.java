@@ -13,15 +13,12 @@ public class BasicShapesFactory implements ShapesFactory {
 	public Shape getShape (String name) throws IllegalShapeException {
 		
 		failIfNull(name);
-		switch (name.toUpperCase()) {
-			case "CIRCLE":
-				return new Circle();
-			case "RECTANGLE":
-				return new Rectangle();
-			case "SQUARE":
-				return new Square();
-			default:
-				throw new IllegalShapeException("Unsupported shape for " + this.getClass().getSimpleName() + ": " + name);
-		}
+        return switch (name.toUpperCase()) {
+            case "CIRCLE" -> new Circle();
+            case "RECTANGLE" -> new Rectangle();
+            case "SQUARE" -> new Square();
+            default ->
+                    throw new IllegalShapeException("Unsupported shape for " + this.getClass().getSimpleName() + ": " + name);
+        };
 	}
 }

@@ -13,15 +13,12 @@ public class AdvancedShapesFactory implements ShapesFactory {
 	public Shape getShape (String name) throws IllegalShapeException {
 		
 		failIfNull(name);
-		switch (name.toUpperCase()) {
-			case "TRIANGLE":
-				return new Triangle();
-			case "PENTAGON":
-				return new Pentagon();
-			case "HEXAGON":
-				return new Hexagon();
-			default:
-				throw new IllegalShapeException("Unsupported shape for " + this.getClass().getSimpleName() + ": " + name);
-		}
+        return switch (name.toUpperCase()) {
+            case "TRIANGLE" -> new Triangle();
+            case "PENTAGON" -> new Pentagon();
+            case "HEXAGON" -> new Hexagon();
+            default ->
+                    throw new IllegalShapeException("Unsupported shape for " + this.getClass().getSimpleName() + ": " + name);
+        };
 	}
 }
